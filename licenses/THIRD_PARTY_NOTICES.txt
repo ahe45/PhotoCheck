@@ -1,0 +1,18 @@
+PhotoCheck 0.1.0 third-party attribution
+
+MediaPipe and its bundled public vision model assets:
+Google / Google AI Edge, Apache License 2.0.
+https://github.com/google-ai-edge/mediapipe
+Model download URLs and SHA-256 hashes: models/manifest.json
+MediaPipe license text: MediaPipe-Apache-2.0.txt
+
+PySide6 / Qt: The Qt Company, LGPLv3 / GPLv3 / commercial licensing.
+https://doc.qt.io/qtforpython-6/licenses.html
+Pillow: Pillow contributors, HPND.
+NumPy: NumPy Developers, BSD-3-Clause.
+OpenCV: OpenCV contributors, Apache-2.0.
+Other transitive package license files are collected in dependency-licenses/.
+
+This notice records upstream attribution. Distributors are responsible for
+complying with applicable licensing terms for their distribution.
+

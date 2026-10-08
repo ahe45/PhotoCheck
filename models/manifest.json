@@ -1,0 +1,35 @@
+{
+  "version": "google-float16-v1+ppocrv3-det+korean-ppocrv5-rec",
+  "models": [
+    {
+      "filename": "blaze_face_short_range.tflite",
+      "sha256": "b4578f35940bf5a1a655214a1cce5cab13eba73c1297cd78e1a04c2380b0152f",
+      "url": "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite",
+      "bytes": 229746
+    },
+    {
+      "filename": "face_landmarker.task",
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "url": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+      "bytes": 3758596
+    },
+    {
+      "filename": "ppocrv3_det.onnx",
+      "sha256": "03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587",
+      "url": "https://media.githubusercontent.com/media/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/text_detection_ppocr/text_detection_cn_ppocrv3_2023may.onnx",
+      "bytes": 2423490
+    },
+    {
+      "filename": "korean_ppocrv5_rec.onnx",
+      "sha256": "92f0b7785e64fc9090106a241cf4c1eb97472824558272751b88a2a4476d3a08",
+      "url": "https://huggingface.co/PaddlePaddle/korean_PP-OCRv5_mobile_rec_onnx/resolve/5c6f574b8e2230adf4287b33e736d71b9fabd28e/inference.onnx",
+      "bytes": 13418787
+    },
+    {
+      "filename": "korean_rec_dict.json",
+      "sha256": "8c89748b14e07b3332eb3fa569cf39eb78dbfc7ed2fe0f333f19f9574e94c6f3",
+      "url": "https://huggingface.co/PaddlePaddle/korean_PP-OCRv5_mobile_rec_onnx/resolve/5c6f574b8e2230adf4287b33e736d71b9fabd28e/inference.yml",
+      "bytes": 71345
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+PP-OCRv3 text detection (detection only)
+Copyright (c) 2016 PaddlePaddle Authors. Apache License 2.0.
+https://github.com/opencv/opencv_zoo/tree/47534e27c9851bb1128ccc0102f1145e27f23f98/models/text_detection_ppocr
+Source weights: text_detection_cn_ppocrv3_2023may.onnx
+SHA256 03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587
+Korean PP-OCRv5 mobile recognition and its character dictionary (Apache 2.0)
+https://huggingface.co/PaddlePaddle/korean_PP-OCRv5_mobile_rec_onnx/tree/5c6f574b8e2230adf4287b33e736d71b9fabd28e
+Recognition SHA256 92f0b7785e64fc9090106a241cf4c1eb97472824558272751b88a2a4476d3a08
+Dictionary source inference.yml SHA256 f757fa1c40e99edcf27e9cce879b93eb2a51fa46f5ef39095689b8c37dd75998
+Dictionary reformatted as UTF-8 JSON; recognition is used only to count consecutive characters.

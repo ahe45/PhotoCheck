@@ -1,0 +1,13 @@
+.venv*/
+__pycache__/
+.pytest_cache/
+build/
+dist/
+*.pyc
+build-smoke.json
+/sample/
+.idea/
+.coverage
+htmlcov/
+*.tmp
+*.log

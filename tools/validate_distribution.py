@@ -3,6 +3,7 @@ import csv
 import json
 import os
 from pathlib import Path
+from build_artifact import executable_path
 import shutil
 import subprocess
 import tempfile
@@ -14,8 +15,8 @@ with tempfile.TemporaryDirectory(prefix="사진 검수 단일 배포-") as direc
     temporary = Path(directory).resolve()
     app_dir = temporary / "읽기 전용 실행 폴더"
     app_dir.mkdir()
-    executable = app_dir / "PhotoCheck.exe"
-    shutil.copyfile(root / "dist" / "PhotoCheck.exe", executable)
+    executable = app_dir / executable_path(root).name
+    shutil.copyfile(executable_path(root), executable)
     env = {key: value for key, value in os.environ.items() if not key.startswith(("PYTHON", "QT_"))}
     env["PATH"] = str(Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32")
     env["LOCALAPPDATA"] = str(temporary / "사용자 데이터")

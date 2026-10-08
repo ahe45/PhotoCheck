@@ -16,4 +16,6 @@ if ($LASTEXITCODE -ne 0) { throw '실행 파일 빌드 실패' }
 if ($LASTEXITCODE -ne 0) { throw '배포 실행 검증 실패' }
 & $taskPython tools\verify_review_permissions.py
 if ($LASTEXITCODE -ne 0) { throw '권한 검증 실패' }
-Write-Host '생성 완료: dist\PhotoCheck.exe'
+$taskVersion = & $taskPython -c "from photocheck import __version__; print(__version__)"
+if ($LASTEXITCODE -ne 0) { throw '버전 확인 실패' }
+Write-Host "생성 완료: dist\PhotoCheck_$taskVersion.exe"

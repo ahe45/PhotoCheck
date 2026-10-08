@@ -1,7 +1,9 @@
 from pathlib import Path
+import runpy
 from PyInstaller.utils.hooks import collect_all
 
 root = Path(SPECPATH)
+version = runpy.run_path(str(root / 'photocheck' / '__init__.py'))['__version__']
 mp_data, mp_binaries, mp_hidden = collect_all('mediapipe', filter_submodules=lambda name:
     not any(part in name for part in ('.test', '.benchmark', '.genai', '.metadata', '.solutions')))
 # Task APIs load our two verified model buffers, never legacy Solutions assets.
@@ -45,6 +47,6 @@ analysis.datas = [entry for entry in analysis.datas
                          and Path(entry[0]).suffix.casefold() in ('.tflite', '.binarypb', '.pbtxt'))]
 archive = PYZ(analysis.pure)
 exe = EXE(archive, analysis.scripts, analysis.binaries, analysis.datas,
-          name='PhotoCheck', console=False, debug=False, strip=False, upx=False,
+          name=f'PhotoCheck_{version}', console=False, debug=False, strip=False, upx=False,
           runtime_tmpdir=r'%LOCALAPPDATA%\PhotoCheck\Runtime',
           uac_admin=False, uac_uiaccess=False)

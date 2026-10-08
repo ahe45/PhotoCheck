@@ -3,6 +3,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 
 root = Path(__file__).resolve().parent.parent
 
@@ -44,7 +45,7 @@ comparison = {'ok':True,'total':len(new),'previous_counts':previous['counts'],
     'settings_ids':settings_ids,'example':{'file':'128100020.jpg','status':example['자동 분류'],
         'reasons':example['판정 사유'],'metrics':metrics},'accuracy_measured':False}
 (root/'build/recapture-release-comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
-exe=root/'dist/PhotoCheck.exe'
+exe=executable_path(root)
 digest=hashlib.sha256(exe.read_bytes()).hexdigest().upper()
 labels = {
     'unreadable_file_is_error':'읽기 금지 사진을 파일 오류로 처리',
@@ -64,7 +65,7 @@ labels = {
 checks='\n'.join(f'| {labels[name]} | {"통과" if ok else "실패"} |' for name,ok in permissions['checks'].items())
 document=f'''# 사진 검수·배포 검증 결과
 
-검증일: 2026-10-08. Windows 11 64비트, 관리자 권한 없는 계정에서 최신 단일 실행 파일 `dist/PhotoCheck.exe`로 검사했습니다. 기준 버전은 `strict-0.5-settings-recapture-unvalidated`, 기본 설정 ID는 `{settings_ids[0]}`입니다.
+검증일: 2026-10-08. Windows 11 64비트, 관리자 권한 없는 계정에서 최신 단일 실행 파일 `dist/{executable_path(root).name}`로 검사했습니다. 기준 버전은 `strict-0.5-settings-recapture-unvalidated`, 기본 설정 ID는 `{settings_ids[0]}`입니다.
 
 ## 이번 변경
 
@@ -131,7 +132,7 @@ document=f'''# 사진 검수·배포 검증 결과
 
 ## 배포 파일
 
-`dist/PhotoCheck.exe` 하나를 복사해 실행합니다. 크기 {exe.stat().st_size:,}바이트. SHA-256: `{digest}`.
+`dist/{executable_path(root).name}` 하나를 복사해 실행합니다. 크기 {exe.stat().st_size:,}바이트. SHA-256: `{digest}`.
 
 기존 개발 실험과 기준 0.4 보고서는 `build/TEST_RESULTS-criteria-0.4.md`에 보존했습니다.
 '''

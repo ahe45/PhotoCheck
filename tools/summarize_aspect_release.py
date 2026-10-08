@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 
 root=Path(__file__).resolve().parent.parent
 
@@ -52,7 +53,7 @@ comparison={'ok':True,'total':len(new),'baseline_total':len(old),'new_sample_cou
     'elapsed_seconds':current['elapsed_seconds']}
 (root/'build/aspect-release-comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
 example_rows='\n'.join(f"| {row['상대 경로']} | {json.loads(row['분석 수치'])['image_width']}×{json.loads(row['분석 수치'])['image_height']} | {json.loads(row['분석 수치'])['image_aspect_ratio']:.4f} |" for row in ratio_rows)
-exe=root/'dist/PhotoCheck.exe'
+exe=executable_path(root)
 digest=hashlib.sha256(exe.read_bytes()).hexdigest().upper()
 seconds=current['elapsed_seconds']
 rounded_seconds=round(seconds)
@@ -108,7 +109,7 @@ document=f'''# 사진 검수·배포 검증 결과
 
 ## 파일
 
-- 실행 파일: `dist/PhotoCheck.exe`, {exe.stat().st_size:,}바이트
+- 실행 파일: `dist/{executable_path(root).name}`, {exe.stat().st_size:,}바이트
 - SHA-256: `{digest}`
 - 전체 보고서와 CSV: `build/sample-frozen.json`, `build/sample-frozen.csv`
 - 비율 검사 비교: `build/aspect-release-comparison.json`

@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 import statistics
 import sys
 
@@ -63,7 +64,7 @@ summary = {'criteria':Criteria().snapshot(), 'sample':sample[0],
     'accuracy_measured':False,
     'suspected_files':[{'file':row['상대 경로'],'reasons':row['판정 사유'], 'metrics':m} for row,m in text_rows]}
 (root/'build/text-presence-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
-exe = root/'dist/PhotoCheck.exe'
+exe = executable_path(root)
 contents = exe.read_bytes()
 compact = report('compact-archive.json')
 assert compact['ok'] and compact['bytes'] == len(contents)
@@ -107,7 +108,7 @@ Windows 실제 권한 검사 {len(permissions['checks'])}개 모두 통과:
 
 {checks}
 
-배포 파일 `dist/PhotoCheck.exe`: {len(contents):,}바이트. SHA256 `{hashlib.sha256(contents).hexdigest()}`.
+배포 파일 `dist/{executable_path(root).name}`: {len(contents):,}바이트. SHA256 `{hashlib.sha256(contents).hexdigest()}`.
 
 ## 결과 파일
 

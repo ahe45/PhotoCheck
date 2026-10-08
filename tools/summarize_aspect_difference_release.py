@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 
 root=Path(__file__).resolve().parent.parent
 
@@ -51,7 +52,7 @@ comparison={'ok':True,'total':len(new),'counts':current['counts'],
     'changed_files':changed,'settings_ids':settings_ids,'elapsed_seconds':current['elapsed_seconds'],
     'accuracy_measured':False}
 (root/'build/aspect-difference-comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
-exe=root/'dist/PhotoCheck.exe'
+exe=executable_path(root)
 digest=hashlib.sha256(exe.read_bytes()).hexdigest().upper()
 seconds=current['elapsed_seconds']
 rounded=round(seconds)
@@ -113,7 +114,7 @@ document=f'''# 사진 검수·배포 검증 결과
 
 ## 결과 파일
 
-- 실행 파일: `dist/PhotoCheck.exe`, {exe.stat().st_size:,}바이트
+- 실행 파일: `dist/{executable_path(root).name}`, {exe.stat().st_size:,}바이트
 - SHA-256: `{digest}`
 - 전체 검사: `build/sample-frozen.json`, `build/sample-frozen.csv`
 - 새 계산 사전 조사: `build/aspect-inventory.json`

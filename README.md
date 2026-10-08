@@ -4,7 +4,7 @@
 
 ## 실행
 
-배포 파일은 `dist/PhotoCheck.exe`입니다. **이 파일 하나만 복사하면 Python 설치와 관리자 권한 없이 실행할 수 있습니다.** 더블 클릭 후 사진 폴더를 선택하고 **검사 시작**을 누르세요. 기본 목록에는 확인 필요·파일 오류만 표시합니다. 검색과 사유 필터를 적용한 목록을 기준으로 이전·다음 버튼 또는 목록/미리보기 영역의 좌우 키로 이동합니다. 사진은 화면 맞춤, 확대·축소, 마우스 휠 확대, 드래그 이동을 지원합니다. 분석 표시를 켜면 얼굴 검출 영역과 눈·코·턱 등의 얼굴 특징점을 볼 수 있습니다.
+배포 파일은 `dist/PhotoCheck_0.1.0.exe`입니다. 빌드 파일명은 `PhotoCheck_버전.exe` 형식이며 `photocheck/__init__.py`의 `__version__`을 사용합니다. **이 파일 하나만 복사하면 Python 설치와 관리자 권한 없이 실행할 수 있습니다.** 더블 클릭 후 사진 폴더를 선택하고 **검사 시작**을 누르세요. 기본 목록에는 확인 필요·파일 오류만 표시합니다. 검색과 사유 필터를 적용한 목록을 기준으로 이전·다음 버튼 또는 목록/미리보기 영역의 좌우 키로 이동합니다. 사진은 화면 맞춤, 확대·축소, 마우스 휠 확대, 드래그 이동을 지원합니다. 분석 표시를 켜면 얼굴 검출 영역과 눈·코·턱 등의 얼굴 특징점을 볼 수 있습니다.
 
 취소하면 현재 파일 처리가 끝난 뒤 중단하며 처리된 결과를 유지합니다. 미처리는 정상으로 집계하지 않습니다. 새 검사는 이전 결과와 정상 재분류를 초기화합니다. **결과 저장**은 확인 필요·파일 오류만 엑셀(.xlsx)로 저장하며 자동 정상과 사용자가 정상으로 재분류한 사진은 제외합니다. 검색·필터와 관계없이 현재 검사에서 남은 모든 확인 대상을 저장합니다. 엑셀 설치 없이도 저장할 수 있습니다.
 
@@ -97,7 +97,7 @@ MediaPipe는 `0.10.21`로 고정합니다. 샘플 장기 검사 중 `0.10.35`에
 - [OpenCV Zoo PP-OCRv3](https://github.com/opencv/opencv_zoo/tree/47534e27c9851bb1128ccc0102f1145e27f23f98/models/text_detection_ppocr): PaddlePaddle 문자 후보 검출 모델, 2,423,490바이트, Apache 2.0.
 - [PaddlePaddle Korean PP-OCRv5 mobile recognition](https://huggingface.co/PaddlePaddle/korean_PP-OCRv5_mobile_rec_onnx/tree/5c6f574b8e2230adf4287b33e736d71b9fabd28e): 연속 글자 수 확인용 인식 모델 13,418,787바이트와 문자 사전 71,345바이트, Apache 2.0. 공식 설정의 사전만 UTF-8 JSON으로 변환합니다. ONNX Runtime CPU와 사전까지 내장합니다.
 
-배포에는 사용하지 않는 MediaPipe Solutions용 손·자세·홍채 모델, 영상용 FFmpeg, Qt PDF·가상 키보드·QML, AVIF 코덱과 별도 ONNX C-API DLL을 제외합니다. 얼굴 분석이 직접 참조하는 OpenCV DLL, NumPy 계산 모듈, Qt 소프트웨어 그래픽 대체 기능은 유지합니다. `tools/verify_compact_archive.py`는 실제 실행 파일의 제거 목록과 나머지 바이너리의 직접·지연 DLL 참조를 확인합니다. 축소 전 실행 파일은 `build/releases-0.8/PhotoCheck.exe`에 보관합니다.
+배포에는 사용하지 않는 MediaPipe Solutions용 손·자세·홍채 모델, 영상용 FFmpeg, Qt PDF·가상 키보드·QML, AVIF 코덱과 별도 ONNX C-API DLL을 제외합니다. 얼굴 분석이 직접 참조하는 OpenCV DLL, NumPy 계산 모듈, Qt 소프트웨어 그래픽 대체 기능은 유지합니다. `tools/verify_compact_archive.py`는 실제 실행 파일의 제거 목록과 나머지 바이너리의 직접·지연 DLL 참조를 확인합니다. 축소 전 실행 파일의 용량 기록으로 비교하며 이전 실행파일 사본은 임시 파일 정리 시 삭제했습니다.
 
 이전 버전의 Pose Landmarker는 현재 검사와 배포물에서 제외했습니다.
 

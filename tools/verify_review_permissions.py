@@ -2,6 +2,7 @@
 import json
 import os
 from pathlib import Path
+from build_artifact import executable_path
 import shutil
 import subprocess
 import tempfile
@@ -10,8 +11,8 @@ from PIL import Image
 root=Path(__file__).resolve().parent.parent
 with tempfile.TemporaryDirectory(prefix='photocheck-엑셀 복사 권한-') as folder:
     fixture=Path(folder)
-    executable=fixture/'PhotoCheck.exe'
-    shutil.copyfile(root/'dist/PhotoCheck.exe',executable)
+    executable=fixture/executable_path(root).name
+    shutil.copyfile(executable_path(root),executable)
     photo=fixture/'임시 생성 이미지.jpg'
     Image.new('RGB',(300,400),'white').save(photo)
     report=fixture/'권한.json'

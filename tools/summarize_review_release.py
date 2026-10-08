@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 import re
 
 from openpyxl import load_workbook
@@ -20,7 +21,7 @@ assert all(permissions['checks'].values()) and len(permissions['checks']) == 17
 tests=(root/'build/review-tests.log').read_text(encoding='utf-8')
 match=re.search(r'(\d+) passed, (\d+) deselected',tests)
 assert match and tuple(map(int,match.groups())) == (172,20)
-content=(root/'dist/PhotoCheck.exe').read_bytes()
+content=(executable_path(root)).read_bytes()
 assert compact['ok'] and compact['sha256'] == hashlib.sha256(content).hexdigest()
 book=load_workbook(root/'build/isolated-smoke.xlsx')
 try:
@@ -69,7 +70,7 @@ text=f'''# 엑셀 저장·정상 재분류·사진 복사 검증
 
 ## 배포 파일
 
-- `dist/PhotoCheck.exe`: {len(content):,}바이트, **{len(content)/1e6:.1f}MB**.
+- `dist/{executable_path(root).name}`: {len(content):,}바이트, **{len(content)/1e6:.1f}MB**.
 - SHA256: `{compact['sha256']}`.
 - 기존의 미사용 영상·Qt PDF/QML·MediaPipe 부가 모델 제외를 유지합니다. 남은 네이티브 파일 {compact['native_dependencies_checked']}개의 직접·지연 DLL 참조를 확인했습니다.
 - 얼굴 높이 25%, 기울기 5도, 얼굴 신뢰도 0.8, 사진 비율 및 연속 3글자 검사 기준은 변경하지 않았습니다.

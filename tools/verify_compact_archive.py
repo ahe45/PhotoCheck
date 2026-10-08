@@ -2,11 +2,12 @@
 import hashlib
 import json
 from pathlib import Path
+from build_artifact import executable_path
 import pefile
 from PyInstaller.archive.readers import CArchiveReader
 
 root = Path(__file__).resolve().parent.parent
-exe = root/'dist/PhotoCheck.exe'
+exe = executable_path(root)
 archive = CArchiveReader(str(exe))
 names = list(archive.toc)
 removed = {'opencv_videoio_ffmpeg4110_64.dll','qpdf.dll','qt6pdf.dll',
